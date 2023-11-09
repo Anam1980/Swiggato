@@ -13,13 +13,11 @@ import lombok.experimental.FieldDefaults;
 public class FoodItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
 
-    String dishName;
+    int requiredQuantity;
 
-    double price;
-
-    boolean isAvailable;
+    double totalCost;
 
     @ManyToOne
     @JoinColumn
@@ -27,10 +25,10 @@ public class FoodItem {
 
     @ManyToOne
     @JoinColumn
-    CheckOut checkOut;
+    Menu menu;
 
     @ManyToOne
     @JoinColumn
-    Menu menu;
+    CheckOut checkOut;
 
 }

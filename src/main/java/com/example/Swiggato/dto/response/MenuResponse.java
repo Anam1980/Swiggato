@@ -1,16 +1,21 @@
 package com.example.Swiggato.dto.response;
 
-import com.example.Swiggato.Enum.MenuType;
+import com.example.Swiggato.Enum.FoodCategory;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MenuResponse {
-    int restaurantId;
 
-    String name;
+    String dishName;
 
-    MenuType menuType;
+    double price;
 
-    List<FoodItemResponse>foodItemResponses = new ArrayList<>();
+    FoodCategory category;
+
+    boolean veg;
 }

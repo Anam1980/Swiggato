@@ -1,5 +1,6 @@
 package com.example.Swiggato.models;
 
+import com.example.Swiggato.Enum.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -18,27 +19,28 @@ import java.util.List;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
 
     @Size(min = 2, message = "{validation.name.size.too_short}")
     @Size(max = 40, message = "{validation.name.size.too_long}")
     String name;
 
-
-    @Column(unique = true)
     @Email
+    @Column(unique = true)
     String email;
 
+    String address;
 
-    @Column(unique = true, nullable = false)
-    @Size(max = 10, min=10)
-    String phoneNo;
+    @Column(unique = true,nullable = false)
+    @Size(min = 10, max = 10)
+    String mobileNo;
 
-    String location;
+    @Enumerated(EnumType.STRING)
+    Gender gender;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    List<CheckOut> checkOutList = new ArrayList<>();//many orders (child)
+    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
+    Cart cart;
 
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
-    Cart cart;//one cart(child)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    List<CheckOut> orders = new ArrayList<>();
 }

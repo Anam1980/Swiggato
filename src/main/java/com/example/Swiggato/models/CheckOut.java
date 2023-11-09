@@ -3,6 +3,7 @@ package com.example.Swiggato.models;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,29 +19,27 @@ public class CheckOut {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
 
-    String checkOutId;//UUID
+    String orderId;  // UUID
 
-    double totalBill;
+    double orderTotal;
 
-    String address;
-
-    Date time;
+    @CreationTimestamp
+    Date orderTime;
 
     @ManyToOne
     @JoinColumn
     Customer customer;
 
-    @OneToMany(mappedBy = "checkOut", cascade = CascadeType.ALL)
-    List<FoodItem> foodItemList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn
+    DeliveryPartner deliveryPartner;
 
     @ManyToOne
     @JoinColumn
     Restaurant restaurant;
 
-    @ManyToOne
-    @JoinColumn
-    DeliveryPartner deliveryPartner;
-
+    @OneToMany(mappedBy = "checkOut",cascade = CascadeType.ALL)
+    List<FoodItem> foodItems = new ArrayList<>();
 }

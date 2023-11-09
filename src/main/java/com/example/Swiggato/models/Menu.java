@@ -1,6 +1,6 @@
 package com.example.Swiggato.models;
 
-import com.example.Swiggato.Enum.MenuType;
+import com.example.Swiggato.Enum.FoodCategory;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,17 +17,23 @@ import java.util.List;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
 
-    String name;
+    String dishName;
 
-    MenuType menuType;
+    double price;
 
-    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
-    List<FoodItem>foodItemList = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    FoodCategory foodCategory;
+
+    boolean veg;
+
+    boolean available;
 
     @ManyToOne
     @JoinColumn
     Restaurant restaurant;
 
+    @OneToMany(mappedBy = "menu",cascade = CascadeType.ALL)
+    List<FoodItem> foodItems = new ArrayList<>();
 }

@@ -2,6 +2,7 @@ package com.example.Swiggato.models;
 
 import com.example.Swiggato.Enum.RestaurantCategory;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -17,21 +18,24 @@ import java.util.List;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
 
     String name;
 
-    boolean isOpened;
-
     String location;
 
+    @Enumerated(EnumType.STRING)
     RestaurantCategory restaurantCategory;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    List<Menu> menuList = new ArrayList<>();
+    @Column(unique = true,nullable = false)
+    @Size(min = 10, max = 10)
+    String contactNumber;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    List<CheckOut>checkOuts = new ArrayList<>();
+    boolean opened;
 
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    List<Menu> availableMenuItems = new ArrayList<>();
 
+    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
+    List<CheckOut> orders = new ArrayList<>();
 }

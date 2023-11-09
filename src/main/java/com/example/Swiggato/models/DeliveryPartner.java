@@ -2,6 +2,7 @@ package com.example.Swiggato.models;
 
 import com.example.Swiggato.Enum.Gender;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,16 +19,21 @@ import java.util.List;
 public class DeliveryPartner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
+    int id;
 
     String name;
 
-    @Column(unique = true,nullable = false)
-    @Size(max = 10, min = 10)
-    String phoneNo;
+    @Column(unique = true)
+    @Email
+    String email;
 
+    @Column(unique = true,nullable = false)
+    @Size(min = 10, max = 10)
+    String mobileNo;
+
+    @Enumerated(EnumType.STRING)
     Gender gender;
 
-    @OneToMany(mappedBy = "deliveryPartner", cascade = CascadeType.ALL)
-    List<CheckOut>checkOutList = new ArrayList<>();
+    @OneToMany(mappedBy = "deliveryPartner",cascade = CascadeType.ALL)
+    List<CheckOut> orders = new ArrayList<>();
 }

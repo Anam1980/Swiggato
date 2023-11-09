@@ -1,6 +1,6 @@
 package com.example.Swiggato.Enum;
 
-public enum MenuType {
+public enum FoodCategory {
     STARTER,
     DESSERT,
     MAIN_COURSE,

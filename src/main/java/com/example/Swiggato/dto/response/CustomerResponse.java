@@ -1,17 +1,20 @@
 package com.example.Swiggato.dto.response;
 
-import com.example.Swiggato.models.Cart;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerResponse {
 
     String name;
 
-    String email;
+    String mobileNo;
 
-    String phoneNo;
-
-    String location;
+    String address;
 
     CartResponse cart;
-
 }
